@@ -1,4 +1,4 @@
-package org.maintenancesystem.domain.entities;
+package org.maintenancesystem.domain.model.entities;
 
 public class Technical {
 

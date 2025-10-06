@@ -1,4 +1,4 @@
-package org.maintenancesystem.domain.enums;
+package org.maintenancesystem.domain.model.enums;
 
 public enum MaintenanceRequestStatus {
 

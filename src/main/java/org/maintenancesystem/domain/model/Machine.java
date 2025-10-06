@@ -1,6 +1,6 @@
-package org.maintenancesystem.domain.entities;
+package org.maintenancesystem.domain.model.entities;
 
-import org.maintenancesystem.domain.enums.MachineStatus;
+import org.maintenancesystem.domain.model.MachineStatus;
 
 public class Machine {
 
@@ -9,14 +9,14 @@ public class Machine {
     public String sector;
     public MachineStatus status;
 
-    public Machine(Long ID, String name, String sector, MachineStatus status) {
+    public Machine(Long ID, String name, String sector, org.maintenancesystem.domain.model.enums.MachineStatus status) {
         this.ID = ID;
         this.name = name;
         this.sector = sector;
         this.status = status;
     }
 
-    public Machine(String name, String sector, MachineStatus status) {
+    public Machine(String name, String sector, org.maintenancesystem.domain.model.enums.MachineStatus status) {
         this.name = name;
         this.sector = sector;
         this.status = status;
@@ -46,11 +46,11 @@ public class Machine {
         this.sector = sector;
     }
 
-    public MachineStatus getStatus() {
+    public org.maintenancesystem.domain.model.enums.MachineStatus getStatus() {
         return status;
     }
 
-    public void setStatus(MachineStatus status) {
+    public void setStatus(org.maintenancesystem.domain.model.enums.MachineStatus status) {
         this.status = status;
     }
 }
