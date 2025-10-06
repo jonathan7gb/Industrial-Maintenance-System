@@ -13,17 +13,17 @@ public class MaintenanceRequest {
     private LocalDate requestDate;
     private MaintenanceRequestStatus status;
 
-    public MaintenanceRequest(Long ID, org.maintenancesystem.domain.model.entities.Machine machine, org.maintenancesystem.domain.model.entities.Technical technical, LocalDate requestDate, org.maintenancesystem.domain.model.enums.MaintenanceRequestStatus status) {
+    public MaintenanceRequest(Long ID, org.maintenancesystem.domain.model.entities.Machine machine, Technician technician, LocalDate requestDate, org.maintenancesystem.domain.model.enums.MaintenanceRequestStatus status) {
         this.ID = ID;
         this.machine = machine;
-        this.technical = technical;
+        this.technical = technician;
         this.requestDate = requestDate;
         this.status = status;
     }
 
-    public MaintenanceRequest(org.maintenancesystem.domain.model.entities.Machine machine, org.maintenancesystem.domain.model.entities.Technical technical, LocalDate requestDate, org.maintenancesystem.domain.model.enums.MaintenanceRequestStatus status) {
+    public MaintenanceRequest(org.maintenancesystem.domain.model.entities.Machine machine, Technician technician, LocalDate requestDate, org.maintenancesystem.domain.model.enums.MaintenanceRequestStatus status) {
         this.machine = machine;
-        this.technical = technical;
+        this.technical = technician;
         this.requestDate = requestDate;
         this.status = status;
     }
@@ -44,12 +44,12 @@ public class MaintenanceRequest {
         this.machine = machine;
     }
 
-    public org.maintenancesystem.domain.model.entities.Technical getTechnical() {
+    public Technician getTechnical() {
         return technical;
     }
 
-    public void setTechnical(org.maintenancesystem.domain.model.entities.Technical technical) {
-        this.technical = technical;
+    public void setTechnical(Technician technician) {
+        this.technical = technician;
     }
 
     public LocalDate getRequestDate() {

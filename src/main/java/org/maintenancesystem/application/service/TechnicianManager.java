@@ -1,4 +1,4 @@
 package org.maintenancesystem.application.service;
 
-public class TechnicalManager {
+public class TechnicianManager {
 }

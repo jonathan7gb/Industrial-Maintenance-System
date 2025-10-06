@@ -1,18 +1,18 @@
 package org.maintenancesystem.domain.model.entities;
 
-public class Technical {
+public class Technician {
 
     private Long ID;
     private String name;
     private String specialty;
 
-    public Technical(Long ID, String name, String specialty) {
+    public Technician(Long ID, String name, String specialty) {
         this.ID = ID;
         this.name = name;
         this.specialty = specialty;
     }
 
-    public Technical(String name, String specialty) {
+    public Technician(String name, String specialty) {
         this.name = name;
         this.specialty = specialty;
     }
