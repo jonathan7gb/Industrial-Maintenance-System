@@ -14,7 +14,7 @@ public class TechnicianManager {
         TechnicianRepositoryImplements technicianRepository = new TechnicianRepositoryImplements();
         try{
             boolean exists = technicianRepository.verifyTechnicalIfNameAlreadyExists(technician.getName());
-            if(!exists){
+            if(exists){
                 MessageHelper.error("Já existe um técnico com esse nome cadastrado!");
             }else{
                 technicianRepository.registerTechnical(technician);

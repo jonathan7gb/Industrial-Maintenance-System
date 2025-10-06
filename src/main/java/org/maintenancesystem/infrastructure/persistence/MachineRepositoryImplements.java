@@ -13,9 +13,9 @@ public class MachineRepositoryImplements implements MachineRepositoryPort {
 
     @Override
     public void registerMachine(Machine machine) throws SQLException {
-        String comando = "INSERT INTO Maquina (nome, setor, status) VALUES (?, ?, ?)";
+        String command = "INSERT INTO Maquina (nome, setor, status) VALUES (?, ?, ?)";
 
-        try(Connection conn = ConnectionDatabase.connect(); PreparedStatement stmt = conn.prepareStatement(comando)) {
+        try(Connection conn = ConnectionDatabase.connect(); PreparedStatement stmt = conn.prepareStatement(command)) {
             stmt.setString(1, machine.getName());
             stmt.setString(2, machine.getSector());
             stmt.setObject(3, machine.getStatus());
@@ -25,12 +25,12 @@ public class MachineRepositoryImplements implements MachineRepositoryPort {
 
     @Override
     public List<Machine> getAllMachines() throws SQLException {
-        String comando = "SELECT id, nome, setor, status FROM Maquina";
+        String command = "SELECT id, nome, setor, status FROM Maquina";
 
         List<Machine> machines = new ArrayList<>();
 
         try (Connection conn = ConnectionDatabase.connect();
-             PreparedStatement stmt = conn.prepareStatement(comando);
+             PreparedStatement stmt = conn.prepareStatement(command);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {

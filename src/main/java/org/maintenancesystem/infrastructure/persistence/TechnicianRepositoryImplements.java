@@ -16,9 +16,9 @@ import java.util.List;
 public class TechnicianRepositoryImplements implements TechnicianRepositoryPort {
 
     public void registerTechnical(Technician technician) throws SQLException {
-        String comando = "INSERT INTO Tecnico (nome, especialidade) VALUES ( ?, ?)";
+        String command= "INSERT INTO Tecnico (nome, especialidade) VALUES (?, ?)";
 
-        try(Connection conn = ConnectionDatabase.connect(); PreparedStatement stmt = conn.prepareStatement(comando)) {
+        try(Connection conn = ConnectionDatabase.connect(); PreparedStatement stmt = conn.prepareStatement(command)) {
             stmt.setString(1, technician.getName());
             stmt.setString(2, technician.getSpecialty());
             stmt.executeUpdate();
@@ -26,12 +26,12 @@ public class TechnicianRepositoryImplements implements TechnicianRepositoryPort 
     }
 
     public List<Technician> getAllTechnicals() throws SQLException {
-        String comando = "SELECT id, nome, especialidade FROM Tecnico";
+        String command = "SELECT id, nome, especialidade FROM Tecnico";
 
         List<Technician> technicians = new ArrayList<>();
 
         try (Connection conn = ConnectionDatabase.connect();
-             PreparedStatement stmt = conn.prepareStatement(comando);
+             PreparedStatement stmt = conn.prepareStatement(command);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
@@ -48,13 +48,13 @@ public class TechnicianRepositoryImplements implements TechnicianRepositoryPort 
 
     @Override
     public boolean verifyTechnicalIfNameAlreadyExists(String name) throws SQLException {
-        String comando = "SELECT nome FROM Tecnico WHERE nome = ?";
+        String command = "SELECT nome FROM Tecnico WHERE nome = ?";
 
         try (Connection conn = ConnectionDatabase.connect();
-             PreparedStatement stmt = conn.prepareStatement(comando);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(command)) {
 
             stmt.setString(1, name);
+            ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return true;
             }
@@ -65,10 +65,10 @@ public class TechnicianRepositoryImplements implements TechnicianRepositoryPort 
 
     @Override
     public Technician getTechnicalById(Long id) throws SQLException {
-        String comando = "SELECT id, nome, especialidade FROM Tecnico WHERE id = ?";
+        String command = "SELECT id, nome, especialidade FROM Tecnico WHERE id = ?";
 
         try (Connection conn = ConnectionDatabase.connect();
-             PreparedStatement stmt = conn.prepareStatement(comando);
+             PreparedStatement stmt = conn.prepareStatement(command);
              ResultSet rs = stmt.executeQuery()) {
 
             stmt.setLong(1, id);
