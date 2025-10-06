@@ -17,6 +17,7 @@ public class TechnicianView {
     public static Technician insertTechnical(){
         Technician tec = null;
         while(true){
+            System.out.println("\n|| ---- Cadastrar Técnico ----- ||");
             String name = InputHelper.inputString("|| Insira o nome do técnico: ", sc);
 
             String specialty = InputHelper.inputString("|| Insira a especialidade do técnico: ", sc);

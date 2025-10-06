@@ -19,8 +19,7 @@ public class MainMenuView {
                 || 6 - Executar Manutenção
                 || --------------------------------------- ||
                 || 0 - Sair do Sistema
-                || --------------------------------------- ||
-                """
+                || --------------------------------------- ||"""
         );
         return InputHelper.inputInteger("|| Sua escolha: ", sc);
     }

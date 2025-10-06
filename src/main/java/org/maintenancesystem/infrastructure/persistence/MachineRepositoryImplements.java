@@ -27,7 +27,7 @@ public class MachineRepositoryImplements implements MachineRepositoryPort {
     public List<Machine> getAllMachines() throws SQLException {
         String comando = "SELECT id, nome, setor, status FROM Maquina";
 
-        List<Machine> machines = new ArrayList<>(); // Inicializa a lista que será retornada
+        List<Machine> machines = new ArrayList<>();
 
         try (Connection conn = ConnectionDatabase.connect();
              PreparedStatement stmt = conn.prepareStatement(comando);

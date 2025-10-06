@@ -1,6 +1,6 @@
 package org.maintenancesystem.domain.model.entities;
 
-import org.maintenancesystem.domain.model.MachineStatus;
+import org.maintenancesystem.domain.model.enums.MachineStatus;
 
 public class Machine {
 

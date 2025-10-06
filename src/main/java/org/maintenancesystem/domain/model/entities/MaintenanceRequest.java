@@ -1,7 +1,7 @@
 package org.maintenancesystem.domain.model.entities;
 
-import org.maintenancesystem.domain.model.MaintenanceRequestStatus;
-import org.maintenancesystem.domain.model.Technical;
+import org.maintenancesystem.domain.model.enums.MaintenanceRequestStatus;
+import org.maintenancesystem.domain.model.entities.Technician;
 
 import java.time.LocalDate;
 
@@ -9,7 +9,7 @@ public class MaintenanceRequest {
 
     private Long ID;
     private org.maintenancesystem.domain.model.entities.Machine machine;
-    private Technical technical;
+    private Technician technical;
     private LocalDate requestDate;
     private MaintenanceRequestStatus status;
 
