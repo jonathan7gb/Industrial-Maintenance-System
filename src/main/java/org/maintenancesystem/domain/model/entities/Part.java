@@ -4,15 +4,15 @@ public class Part {
 
     private Long ID;
     private String name;
-    private String quantityInStock;
+    private int quantityInStock;
 
-    public Part(Long ID, String name, String quantityInStock) {
+    public Part(Long ID, String name, int quantityInStock) {
         this.ID = ID;
         this.name = name;
         this.quantityInStock = quantityInStock;
     }
 
-    public Part(String name, String quantityInStock) {
+    public Part(String name, int quantityInStock) {
         this.name = name;
         this.quantityInStock = quantityInStock;
     }
@@ -33,11 +33,11 @@ public class Part {
         this.name = name;
     }
 
-    public String getQuantityInStock() {
+    public int getQuantityInStock() {
         return quantityInStock;
     }
 
-    public void setQuantityInStock(String quantityInStock) {
+    public void setQuantityInStock(int quantityInStock) {
         this.quantityInStock = quantityInStock;
     }
 }
