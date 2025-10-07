@@ -40,9 +40,10 @@ public class MaintenanceRequestManager {
         while(true){
             try{
                 System.out.println("\n|| ------- Criar ordem de manutenção  ------- ||");
-                machineList = machineRepositoryAdapter.getAllMachines();
+                machineList = machineRepositoryAdapter.getAllOperationalMachines();
                 if(machineList.isEmpty()){
-                    MessageHelper.error("Nenhuma máquina encontrada.");
+                    MessageHelper.error("Nenhuma máquina em operação encontrada.\n");
+                    return;
                 }else{
                    Long machineID = machineView.insertID(machineList);
                    mac = machineRepositoryAdapter.getMachineById(machineID);
