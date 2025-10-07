@@ -46,9 +46,12 @@ public class PartManager {
 
     public void associatePartsToAOrder(){
         List<MaintenanceRequest> maintenanceRequests = new ArrayList<>();
+        List<Part> parts = new ArrayList<>();
         MaintenanceRepositoryAdapter maintenanceRepositoryAdapter = new MaintenanceRepositoryAdapter();
+        PartRepositoryAdapter partRepositoryAdapter = new PartRepositoryAdapter();
 
         MaintenanceRequest mr = null;
+        Part part = null;
 
         while(true){
             try{
@@ -66,6 +69,39 @@ public class PartManager {
                     }else{
                         System.out.println();
                         break;
+                    }
+                }
+            }catch (SQLException e){
+                MessageHelper.error(e.getMessage());
+            }
+        }
+        Long partID;
+
+        while(true){
+            try{
+                parts = partRepositoryAdapter.getAllPartsStockIsMoreThan0();
+                if(parts.isEmpty()){
+                    MessageHelper.error("Nenhuma Peça encontrada!\n");
+                    return;
+                }else{
+                    partView.getAllParts(parts);
+                    while(true){
+                        partID = partView.insertID();
+                        if(partID == 0){
+                            return;
+                        }else{
+                            part = partRepositoryAdapter.getPartByIdStockIsMoreThan0(partID);
+                            if(part == null){
+                                MessageHelper.error("Nenhuma Peça encontrada!\n");
+                            }else{
+                                double quantityUse = partView.insertPartQuantity();
+                                if(quantityUse <= 0 || quantityUse > part.getQuantityInStock()){
+                                    MessageHelper.error("Quantidade insuficiente!\n");
+                                }else{
+
+                                }
+                            }
+                        }
                     }
                 }
             }catch (SQLException e){

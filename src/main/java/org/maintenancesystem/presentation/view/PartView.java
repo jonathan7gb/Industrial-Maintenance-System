@@ -1,9 +1,11 @@
 package org.maintenancesystem.presentation.view;
 
 import org.maintenancesystem.domain.model.entities.Part;
+import org.maintenancesystem.domain.model.entities.Part;
 import org.maintenancesystem.presentation.helpers.InputHelper;
 import org.maintenancesystem.presentation.helpers.MessageHelper;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class PartView {
@@ -11,7 +13,11 @@ public class PartView {
     static Scanner sc = new Scanner(System.in);
 
     public Long insertID(){
-        return (long) InputHelper.inputInteger("|| Insira o ID da peça: ", sc);
+        return (long) InputHelper.inputInteger("|| Insira o ID da peça (0 para encerrar): ", sc);
+    }
+
+    public double insertPartQuantity(){
+        return InputHelper.inputDouble("|| Insira a quantidade que você vai usar: ", sc);
     }
 
     public Part insertPart(){
@@ -30,4 +36,14 @@ public class PartView {
         }
         return part;
     }
+
+    public void getAllParts(List<Part> parts){
+        System.out.println("|| ------------------ Peças --------------------");
+        for(Part part : parts){
+            System.out.println("|| ---------------------------------------------");
+            System.out.printf("|| [%d] %-20s \n|| Quantidade em Estoque: %.2f\n", part.getID(), part.getName(), part.getQuantityInStock());
+        }
+        System.out.println("|| ---------------------------------------------");
+    }
+
 }
