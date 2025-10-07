@@ -5,6 +5,7 @@ import org.maintenancesystem.domain.model.enums.MachineStatus;
 import org.maintenancesystem.presentation.helpers.InputHelper;
 import org.maintenancesystem.presentation.helpers.MessageHelper;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class MachineView {
@@ -30,5 +31,12 @@ public class MachineView {
             }
         }
         return mach;
+    }
+
+    public void getAllMachines(List<Machine> machines){
+        for(Machine machine : machines){
+            System.out.println("|| ---------------------------------------------");
+            System.out.printf("|| %-3d || %-15 || %-20s || %-13s ", machine.getID(), machine.getName(), machine.getSector(), machine.getStatus());
+        }
     }
 }
