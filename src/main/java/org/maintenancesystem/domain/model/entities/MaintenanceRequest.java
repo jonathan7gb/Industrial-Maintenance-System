@@ -28,6 +28,11 @@ public class MaintenanceRequest {
         this.status = status;
     }
 
+    public MaintenanceRequest(Machine machine, Technician technical) {
+        this.machine = machine;
+        this.technical = technical;
+    }
+
     public Long getID() {
         return ID;
     }

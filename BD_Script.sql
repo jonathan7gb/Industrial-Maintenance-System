@@ -21,7 +21,7 @@ select * from Tecnico;
 CREATE TABLE Peca (
 id INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(100) NOT NULL,
-estoque DOUBLE NOT NULL
+estoque DOUBLE NOT NULL 
 );
 select * from Peca;
 
@@ -31,11 +31,12 @@ id INT PRIMARY KEY AUTO_INCREMENT,
 
 idMaquina INT NOT NULL,
 idTecnico INT NOT NULL,
-dataSolicitacao DATE NOT NULL,
+dataSolicitacao DATETIME DEFAULT CURRENT_TIMESTAMP,
 status Enum('PENDENTE', 'EXECUTADA', 'CANCELADA') NOT NULL, 
 FOREIGN KEY (idMaquina) REFERENCES Maquina(id),
 FOREIGN KEY (idTecnico) REFERENCES Tecnico(id)
 );
+select * from OrdemManutencao;
 
 CREATE TABLE OrdemPeca (
 idOrdem INT NOT NULL,
@@ -45,3 +46,4 @@ PRIMARY KEY (idOrdem, idPeca),
 FOREIGN KEY (idOrdem) REFERENCES OrdemManutencao(id),
 FOREIGN KEY (idPeca) REFERENCES Peca(id)
 );
+select * from OrdemPeca;

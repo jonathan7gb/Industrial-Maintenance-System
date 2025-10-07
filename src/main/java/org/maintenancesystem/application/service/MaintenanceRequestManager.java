@@ -3,6 +3,7 @@ package org.maintenancesystem.application.service;
 import org.maintenancesystem.domain.model.entities.Machine;
 import org.maintenancesystem.domain.model.entities.MaintenanceRequest;
 import org.maintenancesystem.domain.model.entities.Technician;
+import org.maintenancesystem.domain.model.enums.MachineStatus;
 import org.maintenancesystem.domain.port.MachineRepositoryPort;
 import org.maintenancesystem.domain.port.MaintenanceRepositoryPort;
 import org.maintenancesystem.infrastructure.adapter.MachineRepositoryAdapter;
@@ -33,6 +34,9 @@ public class MaintenanceRequestManager {
         MachineRepositoryAdapter machineRepositoryAdapter = new MachineRepositoryAdapter();
         TechnicianRepositoryAdapter technicianRepositoryAdapter = new TechnicianRepositoryAdapter();
 
+        Machine mac = null;
+        Technician tech = null;
+
         while(true){
             try{
                 System.out.println("\n|| ------- Criar ordem de manutenção  ------- ||");
@@ -41,7 +45,7 @@ public class MaintenanceRequestManager {
                     MessageHelper.error("Nenhuma máquina encontrada.");
                 }else{
                    Long machineID = machineView.insertID(machineList);
-                   Machine mac = machineRepositoryAdapter.getMachineById(machineID);
+                   mac = machineRepositoryAdapter.getMachineById(machineID);
 
                    if(mac == null){
                        MessageHelper.error("Máquina não encontrada!");
@@ -63,7 +67,7 @@ public class MaintenanceRequestManager {
                     MessageHelper.error("Nenhuma técnico encontrado.");
                 }else{
                     Long technicianID = technicianView.insertID(technicianList);
-                    Technician tech = technicianRepositoryAdapter.getTechnicianById(technicianID);
+                    tech = technicianRepositoryAdapter.getTechnicianById(technicianID);
 
                     if(tech == null){
                         MessageHelper.error("Técnico não encontrado!\n");
@@ -76,6 +80,15 @@ public class MaintenanceRequestManager {
                 MessageHelper.error(e.getMessage());
                 return;
             }
+        }
+
+        try{
+            MaintenanceRequest maintenanceRequest = new MaintenanceRequest(mac, tech);
+            maintenanceRepository.registerMaintenanceRequest(maintenanceRequest);
+            machineRepositoryAdapter.updateMachineStatus(mac.getID(), MachineStatus.EM_MANUTENCAO);
+            MessageHelper.success("Ordem de manutenção criada com sucesso!\n");
+        }catch (SQLException e){
+            MessageHelper.error(e.getMessage());
         }
 
     }
