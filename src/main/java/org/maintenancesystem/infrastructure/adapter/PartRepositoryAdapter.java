@@ -1,7 +1,7 @@
-package org.maintenancesystem.infrastructure.persistence;
+package org.maintenancesystem.infrastructure.adapter;
 
 import org.maintenancesystem.domain.model.entities.Part;
-import org.maintenancesystem.domain.repository.PartRepositoryPort;
+import org.maintenancesystem.domain.port.PartRepositoryPort;
 import org.maintenancesystem.infrastructure.configuration.ConnectionDatabase;
 
 import java.sql.Connection;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PartRepositoryImplements implements PartRepositoryPort {
+public class PartRepositoryAdapter implements PartRepositoryPort {
     @Override
     public void registerPart(Part part) throws SQLException {
         String command = "INSERT INTO Peca (nome, estoque) VALUES (?, ?)";

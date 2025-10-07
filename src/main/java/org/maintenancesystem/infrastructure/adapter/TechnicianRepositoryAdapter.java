@@ -1,9 +1,7 @@
-package org.maintenancesystem.infrastructure.persistence;
+package org.maintenancesystem.infrastructure.adapter;
 
-import org.maintenancesystem.domain.model.entities.Machine;
 import org.maintenancesystem.domain.model.entities.Technician;
-import org.maintenancesystem.domain.model.enums.MachineStatus;
-import org.maintenancesystem.domain.repository.TechnicianRepositoryPort;
+import org.maintenancesystem.domain.port.TechnicianRepositoryPort;
 import org.maintenancesystem.infrastructure.configuration.ConnectionDatabase;
 
 import java.sql.Connection;
@@ -13,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TechnicianRepositoryImplements implements TechnicianRepositoryPort {
+public class TechnicianRepositoryAdapter implements TechnicianRepositoryPort {
 
     public void registerTechnician(Technician technician) throws SQLException {
         String command= "INSERT INTO Tecnico (nome, especialidade) VALUES (?, ?)";

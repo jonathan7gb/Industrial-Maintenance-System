@@ -1,8 +1,7 @@
 package org.maintenancesystem.application.service;
 
 import org.maintenancesystem.domain.model.entities.Technician;
-import org.maintenancesystem.domain.repository.TechnicianRepositoryPort;
-import org.maintenancesystem.infrastructure.persistence.TechnicianRepositoryImplements;
+import org.maintenancesystem.domain.port.TechnicianRepositoryPort;
 import org.maintenancesystem.presentation.helpers.MessageHelper;
 import org.maintenancesystem.presentation.view.TechnicianView;
 

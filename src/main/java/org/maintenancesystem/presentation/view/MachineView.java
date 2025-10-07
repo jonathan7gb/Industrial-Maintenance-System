@@ -36,7 +36,7 @@ public class MachineView {
     public void getAllMachines(List<Machine> machines){
         for(Machine machine : machines){
             System.out.println("|| ---------------------------------------------");
-            System.out.printf("|| %-3d || %-15 || %-20s || %-13s ", machine.getID(), machine.getName(), machine.getSector(), machine.getStatus());
+            System.out.printf("|| [%d] %-15s \n|| %-20s || %-13s ", machine.getID(), machine.getName(), machine.getSector(), machine.getStatus());
         }
     }
 }

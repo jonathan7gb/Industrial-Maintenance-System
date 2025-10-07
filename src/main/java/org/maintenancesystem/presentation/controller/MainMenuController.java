@@ -1,14 +1,17 @@
 package org.maintenancesystem.presentation.controller;
 
 import org.maintenancesystem.application.service.MachineManager;
+import org.maintenancesystem.application.service.MaintenanceRequestManager;
 import org.maintenancesystem.application.service.PartManager;
 import org.maintenancesystem.application.service.TechnicianManager;
-import org.maintenancesystem.domain.repository.MachineRepositoryPort;
-import org.maintenancesystem.domain.repository.PartRepositoryPort;
-import org.maintenancesystem.domain.repository.TechnicianRepositoryPort;
-import org.maintenancesystem.infrastructure.persistence.MachineRepositoryImplements;
-import org.maintenancesystem.infrastructure.persistence.PartRepositoryImplements;
-import org.maintenancesystem.infrastructure.persistence.TechnicianRepositoryImplements;
+import org.maintenancesystem.domain.port.MachineRepositoryPort;
+import org.maintenancesystem.domain.port.MaintenanceRepositoryPort;
+import org.maintenancesystem.domain.port.PartRepositoryPort;
+import org.maintenancesystem.domain.port.TechnicianRepositoryPort;
+import org.maintenancesystem.infrastructure.adapter.MachineRepositoryAdapter;
+import org.maintenancesystem.infrastructure.adapter.MaintenanceRepositoryAdapter;
+import org.maintenancesystem.infrastructure.adapter.PartRepositoryAdapter;
+import org.maintenancesystem.infrastructure.adapter.TechnicianRepositoryAdapter;
 import org.maintenancesystem.presentation.helpers.MessageHelper;
 import org.maintenancesystem.presentation.view.MainMenuView;
 
@@ -16,14 +19,17 @@ public class MainMenuController {
 
     MainMenuView mainMenuView = new MainMenuView();
 
-    TechnicianRepositoryPort t = new TechnicianRepositoryImplements();
+    TechnicianRepositoryPort t = new TechnicianRepositoryAdapter();
     TechnicianManager technicianManager = new TechnicianManager(t);
 
-    MachineRepositoryPort m = new MachineRepositoryImplements();
+    MachineRepositoryPort m = new MachineRepositoryAdapter();
     MachineManager machineManager = new MachineManager(m);
 
-    PartRepositoryPort p = new PartRepositoryImplements();
+    PartRepositoryPort p = new PartRepositoryAdapter();
     PartManager partManager = new PartManager(p);
+
+    MaintenanceRepositoryPort mr = new MaintenanceRepositoryAdapter();
+    MaintenanceRequestManager maintenanceRequestManager = new MaintenanceRequestManager(mr);
 
     public void mainMenuController(){
         int option = 0;

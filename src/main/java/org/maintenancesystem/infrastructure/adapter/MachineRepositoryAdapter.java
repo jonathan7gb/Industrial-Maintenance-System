@@ -1,16 +1,15 @@
-package org.maintenancesystem.infrastructure.persistence;
+package org.maintenancesystem.infrastructure.adapter;
 
 import org.maintenancesystem.domain.model.entities.Machine;
-import org.maintenancesystem.domain.model.entities.Technician;
 import org.maintenancesystem.domain.model.enums.MachineStatus;
-import org.maintenancesystem.domain.repository.MachineRepositoryPort;
+import org.maintenancesystem.domain.port.MachineRepositoryPort;
 import org.maintenancesystem.infrastructure.configuration.ConnectionDatabase;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MachineRepositoryImplements implements MachineRepositoryPort {
+public class MachineRepositoryAdapter implements MachineRepositoryPort {
 
     @Override
     public void registerMachine(Machine machine) throws SQLException {
@@ -82,6 +81,22 @@ public class MachineRepositoryImplements implements MachineRepositoryPort {
             }
 
             return null;
+        }
+    }
+
+    @Override
+    public boolean updateMachineStatus(Long id, MachineStatus machineStatus) throws SQLException {
+        String command = "UPDATE Maquina SET status = ? WHERE id = ?";
+
+        try (Connection conn = ConnectionDatabase.connect();
+             PreparedStatement stmt = conn.prepareStatement(command)) {
+
+            stmt.setString(1, machineStatus.toString());
+            stmt.setLong(2, id);
+
+            int rowsAffected = stmt.executeUpdate();
+
+            return rowsAffected > 0;
         }
     }
 }

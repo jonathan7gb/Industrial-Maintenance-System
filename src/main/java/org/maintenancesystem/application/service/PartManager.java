@@ -1,8 +1,8 @@
 package org.maintenancesystem.application.service;
 
 import org.maintenancesystem.domain.model.entities.Part;
-import org.maintenancesystem.domain.repository.PartRepositoryPort;
-import org.maintenancesystem.infrastructure.persistence.PartRepositoryImplements;
+import org.maintenancesystem.domain.port.PartRepositoryPort;
+import org.maintenancesystem.infrastructure.adapter.PartRepositoryAdapter;
 import org.maintenancesystem.presentation.helpers.MessageHelper;
 import org.maintenancesystem.presentation.view.PartView;
 
@@ -19,7 +19,7 @@ public class PartManager {
 
     public  void registerPart(){
         Part part = partView.insertPart();
-        PartRepositoryImplements partRepository = new PartRepositoryImplements();
+        PartRepositoryAdapter partRepository = new PartRepositoryAdapter();
         try{
             boolean exists = partRepository.verifyPartIfNameAlreadyExists(part.getName());
             if(exists){

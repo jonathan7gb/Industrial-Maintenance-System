@@ -1,7 +1,5 @@
 package org.maintenancesystem;
 
-import org.maintenancesystem.domain.repository.TechnicianRepositoryPort;
-import org.maintenancesystem.infrastructure.persistence.TechnicianRepositoryImplements;
 import org.maintenancesystem.presentation.controller.MainMenuController;
 
 public class Main {

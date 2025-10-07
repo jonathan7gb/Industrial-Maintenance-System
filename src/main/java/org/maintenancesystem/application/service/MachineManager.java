@@ -1,8 +1,8 @@
 package org.maintenancesystem.application.service;
 
 import org.maintenancesystem.domain.model.entities.Machine;
-import org.maintenancesystem.domain.repository.MachineRepositoryPort;
-import org.maintenancesystem.infrastructure.persistence.MachineRepositoryImplements;
+import org.maintenancesystem.domain.port.MachineRepositoryPort;
+import org.maintenancesystem.infrastructure.adapter.MachineRepositoryAdapter;
 import org.maintenancesystem.presentation.helpers.MessageHelper;
 import org.maintenancesystem.presentation.view.MachineView;
 
@@ -19,7 +19,7 @@ public class MachineManager {
 
     public  void registerMachine(){
         Machine machine = machineView.insertMachine();
-        MachineRepositoryImplements machineRepository = new MachineRepositoryImplements();
+        MachineRepositoryAdapter machineRepository = new MachineRepositoryAdapter();
         try{
             boolean exists = machineRepository.verifyMachineIfNameAlreadyExists(machine.getName());
             if(exists){
