@@ -11,13 +11,14 @@ public class MachineView {
 
     static Scanner sc = new Scanner(System.in);
 
-    public static Long insertID(){
+    public Long insertID(){
         return (long) InputHelper.inputInteger("|| Insira o ID da máquina: ", sc);
     }
 
-    public static Machine insertMachine(){
+    public Machine insertMachine(){
         Machine mach = null;
         while(true){
+            System.out.println("\n|| ---- Cadastrar Máquina ----- ||");
             String name = InputHelper.inputString("|| Insira o nome da máquina: ", sc);
             String sector = InputHelper.inputString("|| Insira o setor da máquina: ", sc);
 

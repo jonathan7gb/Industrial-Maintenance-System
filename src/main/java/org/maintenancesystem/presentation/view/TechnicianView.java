@@ -14,7 +14,7 @@ public class TechnicianView {
         return (long) InputHelper.inputInteger("|| Insira o ID do técnico: ", sc);
     }
 
-    public static Technician insertTechnical(){
+    public Technician insertTechnical(){
         Technician tec = null;
         while(true){
             System.out.println("\n|| ---- Cadastrar Técnico ----- ||");

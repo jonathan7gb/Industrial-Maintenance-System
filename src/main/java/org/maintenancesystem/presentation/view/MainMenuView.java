@@ -8,7 +8,7 @@ public class MainMenuView {
 
     static Scanner sc = new Scanner(System.in);
 
-    public static int mainMenuView(){
+    public int mainMenuView(){
         System.out.println("""
                 || --- Sistema de Manutenção Industrial --- ||
                 || 1 - Cadastrar Máquina

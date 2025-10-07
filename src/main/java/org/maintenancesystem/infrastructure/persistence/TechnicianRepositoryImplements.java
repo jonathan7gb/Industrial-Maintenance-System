@@ -15,7 +15,7 @@ import java.util.List;
 
 public class TechnicianRepositoryImplements implements TechnicianRepositoryPort {
 
-    public void registerTechnical(Technician technician) throws SQLException {
+    public void registerTechnician(Technician technician) throws SQLException {
         String command= "INSERT INTO Tecnico (nome, especialidade) VALUES (?, ?)";
 
         try(Connection conn = ConnectionDatabase.connect(); PreparedStatement stmt = conn.prepareStatement(command)) {
@@ -25,7 +25,7 @@ public class TechnicianRepositoryImplements implements TechnicianRepositoryPort 
         }
     }
 
-    public List<Technician> getAllTechnicals() throws SQLException {
+    public List<Technician> getAllTechnicians() throws SQLException {
         String command = "SELECT id, nome, especialidade FROM Tecnico";
 
         List<Technician> technicians = new ArrayList<>();
@@ -47,7 +47,7 @@ public class TechnicianRepositoryImplements implements TechnicianRepositoryPort 
     }
 
     @Override
-    public boolean verifyTechnicalIfNameAlreadyExists(String name) throws SQLException {
+    public boolean verifyTechnicianIfNameAlreadyExists(String name) throws SQLException {
         String command = "SELECT nome FROM Tecnico WHERE nome = ?";
 
         try (Connection conn = ConnectionDatabase.connect();
@@ -64,7 +64,7 @@ public class TechnicianRepositoryImplements implements TechnicianRepositoryPort 
     }
 
     @Override
-    public Technician getTechnicalById(Long id) throws SQLException {
+    public Technician getTechnicianById(Long id) throws SQLException {
         String command = "SELECT id, nome, especialidade FROM Tecnico WHERE id = ?";
 
         try (Connection conn = ConnectionDatabase.connect();

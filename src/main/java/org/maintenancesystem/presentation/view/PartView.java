@@ -10,11 +10,11 @@ public class PartView {
 
     static Scanner sc = new Scanner(System.in);
 
-    public static Long insertID(){
+    public Long insertID(){
         return (long) InputHelper.inputInteger("|| Insira o ID da peça: ", sc);
     }
 
-    public static Part insertPart(){
+    public Part insertPart(){
         Part part = null;
         while(true){
             String name = InputHelper.inputString("|| Insira o nome da peça: ", sc);
