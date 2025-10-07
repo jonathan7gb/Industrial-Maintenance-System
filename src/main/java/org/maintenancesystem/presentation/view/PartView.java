@@ -17,6 +17,7 @@ public class PartView {
     public Part insertPart(){
         Part part = null;
         while(true){
+            System.out.println("\n|| ----- Cadastrar Peça ------ ||");
             String name = InputHelper.inputString("|| Insira o nome da peça: ", sc);
             int quantityInStock = InputHelper.inputInteger("|| Insira a quantidade em estoque da peça: ", sc);
 

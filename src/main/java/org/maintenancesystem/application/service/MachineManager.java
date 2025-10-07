@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class MachineManager {
 
     private final MachineRepositoryPort machineRepository;
-    private MachineView machineView =  new MachineView();
+    private final MachineView machineView =  new MachineView();
 
     public MachineManager(MachineRepositoryPort machineRepository) {
         this.machineRepository = machineRepository;

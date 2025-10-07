@@ -11,7 +11,8 @@ import java.sql.SQLException;
 public class TechnicianManager {
 
     private final TechnicianRepositoryPort technicianRepository;
-    private TechnicianView technicianView =  new TechnicianView();
+    private final TechnicianView technicianView =  new TechnicianView();
+
     public TechnicianManager(TechnicianRepositoryPort technicianRepository) {
         this.technicianRepository = technicianRepository;
     }
