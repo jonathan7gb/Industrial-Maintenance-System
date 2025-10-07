@@ -1,6 +1,7 @@
 package org.maintenancesystem.infrastructure.persistence;
 
 import org.maintenancesystem.domain.model.entities.Machine;
+import org.maintenancesystem.domain.model.entities.Technician;
 import org.maintenancesystem.domain.model.enums.MachineStatus;
 import org.maintenancesystem.domain.repository.MachineRepositoryPort;
 import org.maintenancesystem.infrastructure.configuration.ConnectionDatabase;
@@ -18,7 +19,7 @@ public class MachineRepositoryImplements implements MachineRepositoryPort {
         try(Connection conn = ConnectionDatabase.connect(); PreparedStatement stmt = conn.prepareStatement(command)) {
             stmt.setString(1, machine.getName());
             stmt.setString(2, machine.getSector());
-            stmt.setObject(3, machine.getStatus());
+            stmt.setString(3, machine.getStatus().toString());
             stmt.executeUpdate();
         }
     }
@@ -48,11 +49,39 @@ public class MachineRepositoryImplements implements MachineRepositoryPort {
 
     @Override
     public boolean verifyMachineIfNameAlreadyExists(String name) throws SQLException{
-        return false;
+        String command = "SELECT nome FROM Maquina WHERE nome = ?";
+
+        try (Connection conn = ConnectionDatabase.connect();
+             PreparedStatement stmt = conn.prepareStatement(command)) {
+
+            stmt.setString(1, name);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+
+            return false;
+        }
     }
 
     @Override
     public Machine getMachineById(Long id) throws SQLException {
-        return null;
+        String command = "SELECT id, nome, setor, status FROM Maquina WHERE id = ?";
+
+        try (Connection conn = ConnectionDatabase.connect();
+             PreparedStatement stmt = conn.prepareStatement(command);
+             ResultSet rs = stmt.executeQuery()) {
+
+            stmt.setLong(1, id);
+            if (rs.next()) {
+                String name = rs.getString("nome");
+                String sector = rs.getString("setor");
+                String status = rs.getString("status");
+                MachineStatus machineStatus = MachineStatus.valueOf(status);
+                return new Machine(id, name, sector, machineStatus);
+            }
+
+            return null;
+        }
     }
 }

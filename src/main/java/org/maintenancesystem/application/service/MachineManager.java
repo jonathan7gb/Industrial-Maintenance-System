@@ -23,10 +23,10 @@ public class MachineManager {
         try{
             boolean exists = machineRepository.verifyMachineIfNameAlreadyExists(machine.getName());
             if(exists){
-                MessageHelper.error("Já existe uma máquina com esse nome cadastrada!");
+                MessageHelper.error("Já existe uma máquina com esse nome cadastrada!\n");
             }else{
                 machineRepository.registerMachine(machine);
-                MessageHelper.success("Máquina registrada com sucesso!");
+                MessageHelper.success("Máquina registrada com sucesso!\n");
             }
         }catch(SQLException e){
             MessageHelper.error(e.getMessage());

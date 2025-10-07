@@ -21,10 +21,10 @@ public class TechnicianManager {
         try{
             boolean exists = technicianRepository.verifyTechnicianIfNameAlreadyExists(technician.getName());
             if(exists){
-                MessageHelper.error("Já existe um técnico com esse nome cadastrado!");
+                MessageHelper.error("Já existe um técnico com esse nome cadastrado!\n");
             }else{
                 technicianRepository.registerTechnician(technician);
-                MessageHelper.success("Técnico registrado com sucesso!");
+                MessageHelper.success("Técnico registrado com sucesso!\n");
             }
         }catch(SQLException e){
             MessageHelper.error(e.getMessage());
