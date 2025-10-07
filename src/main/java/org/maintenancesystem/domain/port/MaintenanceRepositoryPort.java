@@ -1,10 +1,14 @@
 package org.maintenancesystem.domain.port;
 
+import org.maintenancesystem.domain.model.entities.Machine;
 import org.maintenancesystem.domain.model.entities.MaintenanceRequest;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public interface MaintenanceRepositoryPort {
 
     void registerMaintenanceRequest(MaintenanceRequest maintenanceRequest) throws SQLException;
+
+    List<MaintenanceRequest> getAllPendingMaintenanceRequests() throws SQLException;
 }
