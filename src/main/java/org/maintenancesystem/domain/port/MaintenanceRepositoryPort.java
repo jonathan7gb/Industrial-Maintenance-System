@@ -11,4 +11,6 @@ public interface MaintenanceRepositoryPort {
     void registerMaintenanceRequest(MaintenanceRequest maintenanceRequest) throws SQLException;
 
     List<MaintenanceRequest> getAllPendingMaintenanceRequests() throws SQLException;
+
+    MaintenanceRequest getPendingMaintenanceById(Long id) throws SQLException;
 }

@@ -108,6 +108,27 @@ public class MachineRepositoryAdapter implements MachineRepositoryPort {
     }
 
     @Override
+    public Machine getOperationalMachineById(Long id) throws SQLException {
+        String command = "SELECT nome, setor, status FROM Maquina WHERE id = ? AND status = 'OPERACIONAL'";
+
+        try (Connection conn = ConnectionDatabase.connect();
+             PreparedStatement stmt = conn.prepareStatement(command)) {
+
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                String name = rs.getString("nome");
+                String sector = rs.getString("setor");
+                String status = rs.getString("status");
+                MachineStatus machineStatus = MachineStatus.valueOf(status);
+                return new Machine(id, name, sector, machineStatus);
+            }
+
+            return null;
+        }
+    }
+
+    @Override
     public boolean updateMachineStatus(Long id, MachineStatus machineStatus) throws SQLException {
         String command = "UPDATE Maquina SET status = ? WHERE id = ?";
 

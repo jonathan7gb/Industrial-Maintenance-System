@@ -41,6 +41,7 @@ public class MainMenuController {
                 case 2 -> technicianManager.registerTechnician();
                 case 3 -> partManager.registerPart();
                 case 4 -> maintenanceRequestManager.insertMaintenanceRequest();
+                case 5 -> partManager.associatePartsToAOrder();
                 case 0 -> {
                     System.out.println("\n|| ---- Saindo do Sistema ---- ||\n");
                     return;

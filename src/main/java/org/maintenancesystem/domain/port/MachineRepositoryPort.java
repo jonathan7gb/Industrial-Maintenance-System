@@ -13,5 +13,6 @@ public interface MachineRepositoryPort {
     List<Machine> getAllOperationalMachines() throws SQLException;
     boolean verifyMachineIfNameAlreadyExists(String name) throws SQLException;
     Machine getMachineById(Long id) throws SQLException;
+    Machine getOperationalMachineById(Long id) throws SQLException;
     boolean updateMachineStatus(Long id, MachineStatus machineStatus) throws SQLException;
 }

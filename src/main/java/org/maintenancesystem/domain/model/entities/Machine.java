@@ -22,6 +22,10 @@ public class Machine {
         this.status = status;
     }
 
+    public Machine (String name){
+        this.name = name;
+    }
+
     public Long getID() {
         return ID;
     }

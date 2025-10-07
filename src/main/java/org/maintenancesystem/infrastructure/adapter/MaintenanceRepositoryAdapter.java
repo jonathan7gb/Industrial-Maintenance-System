@@ -3,7 +3,6 @@ package org.maintenancesystem.infrastructure.adapter;
 import org.maintenancesystem.domain.model.entities.Machine;
 import org.maintenancesystem.domain.model.entities.MaintenanceRequest;
 import org.maintenancesystem.domain.model.entities.Technician;
-import org.maintenancesystem.domain.model.enums.MachineStatus;
 import org.maintenancesystem.domain.model.enums.MaintenanceRequestStatus;
 import org.maintenancesystem.domain.port.MaintenanceRepositoryPort;
 import org.maintenancesystem.infrastructure.configuration.ConnectionDatabase;
@@ -32,7 +31,22 @@ public class MaintenanceRepositoryAdapter implements MaintenanceRepositoryPort {
     }
 
     public List<MaintenanceRequest> getAllPendingMaintenanceRequests() throws SQLException{
-        String command = "SELECT id, idMaquina, idTecnico, dataSolicitacao, status FROM OrdemManutencao WHERE status = 'PENDENTE'";
+        String command = """
+            SELECT
+                OM.id,
+                OM.dataSolicitacao,
+                OM.status,
+                M.nome AS nome_maquina,  
+                T.nome AS nome_tecnico
+            FROM
+                OrdemManutencao AS OM
+            INNER JOIN
+                Maquina AS M ON OM.idMaquina = M.id
+            INNER JOIN
+                Tecnico AS T ON OM.idTecnico = T.id
+            WHERE
+                OM.status = 'PENDENTE';
+        """;
 
         List<MaintenanceRequest> maintenanceRequest = new ArrayList<>();
 
@@ -42,19 +56,58 @@ public class MaintenanceRepositoryAdapter implements MaintenanceRepositoryPort {
 
             while (rs.next()) {
                 Long ID = rs.getLong("id");
-                Long machineID = rs.getLong("idMaquina");
-                Long technicianID = rs.getLong("idTecnico");
                 Date data = rs.getDate("dataSolicitacao");
                 MaintenanceRequestStatus status = MaintenanceRequestStatus.valueOf(rs.getString("status"));
 
-                Machine machine = machineRepositoryAdapter.getMachineById(machineID);
-                Technician technician = technicianRepositoryAdapter.getTechnicianById(technicianID);
+                Machine machine = new Machine(rs.getString("nome_maquina"));
+                Technician technician = new Technician(rs.getString("nome_tecnico"));
                 LocalDate dataSolicitacao = data.toLocalDate();
 
                 maintenanceRequest.add(new MaintenanceRequest(ID, machine, technician, dataSolicitacao,status));
             }
 
             return maintenanceRequest;
+        }
+    }
+
+    @Override
+    public MaintenanceRequest getPendingMaintenanceById(Long id) throws SQLException {
+        String command = """
+            SELECT
+                OM.id,
+                OM.dataSolicitacao,
+                OM.status,
+                M.nome AS nome_maquina,  
+                T.nome AS nome_tecnico
+            FROM
+                OrdemManutencao AS OM
+            INNER JOIN
+                Maquina AS M ON OM.idMaquina = M.id
+            INNER JOIN
+                Tecnico AS T ON OM.idTecnico = T.id
+            WHERE
+                OM.id = ?
+            AND
+                OM.status = 'PENDENTE';
+        """;
+
+        try (Connection conn = ConnectionDatabase.connect();
+             PreparedStatement stmt = conn.prepareStatement(command)) {
+
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Long ID = rs.getLong("id");
+                Date data = rs.getDate("dataSolicitacao");
+                MaintenanceRequestStatus status = MaintenanceRequestStatus.valueOf(rs.getString("status"));
+
+                Machine machine = new Machine(rs.getString("nome_maquina"));
+                Technician technician = new Technician(rs.getString("nome_tecnico"));
+                LocalDate dataSolicitacao = data.toLocalDate();
+                return new MaintenanceRequest(ID, machine, technician, dataSolicitacao,status);
+            }
+
+            return null;
         }
     }
 }

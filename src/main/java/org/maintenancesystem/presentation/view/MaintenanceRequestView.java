@@ -20,7 +20,7 @@ public class MaintenanceRequestView {
     public void getAllMaintenanceRequests(List<MaintenanceRequest> maintenanceRequests){
         for(MaintenanceRequest mr : maintenanceRequests){
             System.out.println("|| ---------------------------------------------");
-            System.out.printf("|| [%d] %s \n|| Máquina: %s\n|| Técnico: %s \n|| Status: %s", mr.getID(), mr.getRequestDate(), mr.getMachine().getName(), mr.getTechnical().getName(), mr.getStatus());
+            System.out.printf("|| [%d] %s \n|| Máquina: %s\n|| Técnico: %s \n|| Status: %s\n", mr.getID(), mr.getRequestDate(), mr.getMachine().getName(), mr.getTechnical().getName(), mr.getStatus());
         }
     }
 }

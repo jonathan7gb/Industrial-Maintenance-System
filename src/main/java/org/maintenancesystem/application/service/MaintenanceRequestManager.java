@@ -4,7 +4,6 @@ import org.maintenancesystem.domain.model.entities.Machine;
 import org.maintenancesystem.domain.model.entities.MaintenanceRequest;
 import org.maintenancesystem.domain.model.entities.Technician;
 import org.maintenancesystem.domain.model.enums.MachineStatus;
-import org.maintenancesystem.domain.port.MachineRepositoryPort;
 import org.maintenancesystem.domain.port.MaintenanceRepositoryPort;
 import org.maintenancesystem.infrastructure.adapter.MachineRepositoryAdapter;
 import org.maintenancesystem.infrastructure.adapter.TechnicianRepositoryAdapter;
@@ -46,7 +45,7 @@ public class MaintenanceRequestManager {
                     return;
                 }else{
                    Long machineID = machineView.insertID(machineList);
-                   mac = machineRepositoryAdapter.getMachineById(machineID);
+                   mac = machineRepositoryAdapter.getOperationalMachineById(machineID);
 
                    if(mac == null){
                        MessageHelper.error("Máquina não encontrada!");
@@ -73,7 +72,6 @@ public class MaintenanceRequestManager {
                     if(tech == null){
                         MessageHelper.error("Técnico não encontrado!\n");
                     }else{
-                        System.out.println();
                         break;
                     }
                 }
