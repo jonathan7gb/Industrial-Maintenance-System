@@ -66,10 +66,10 @@ public class TechnicianRepositoryAdapter implements TechnicianRepositoryPort {
         String command = "SELECT id, nome, especialidade FROM Tecnico WHERE id = ?";
 
         try (Connection conn = ConnectionDatabase.connect();
-             PreparedStatement stmt = conn.prepareStatement(command);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(command)) {
 
             stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 String name = rs.getString("nome");
                 String specialty = rs.getString("especialidade");

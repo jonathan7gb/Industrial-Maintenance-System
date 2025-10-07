@@ -40,6 +40,7 @@ public class MainMenuController {
                 case 1 -> machineManager.registerMachine();
                 case 2 -> technicianManager.registerTechnician();
                 case 3 -> partManager.registerPart();
+                case 4 -> maintenanceRequestManager.insertMaintenanceRequest();
                 case 0 -> {
                     System.out.println("\n|| ---- Saindo do Sistema ---- ||\n");
                     return;

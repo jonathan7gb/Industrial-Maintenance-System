@@ -47,6 +47,29 @@ public class MachineRepositoryAdapter implements MachineRepositoryPort {
     }
 
     @Override
+    public List<Machine> getAllOperationalMachines() throws SQLException {
+        String command = "SELECT id, nome, setor, status FROM Maquina WHERE status = 'OPERACIONAL'";
+
+        List<Machine> machines = new ArrayList<>();
+
+        try (Connection conn = ConnectionDatabase.connect();
+             PreparedStatement stmt = conn.prepareStatement(command);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Long ID = rs.getLong("id");
+                String name = rs.getString("nome");
+                String sector = rs.getString("setor");
+                MachineStatus status = MachineStatus.valueOf(rs.getString("status"));
+
+                machines.add(new Machine(ID, name, sector, status));
+            }
+
+            return machines;
+        }
+    }
+
+    @Override
     public boolean verifyMachineIfNameAlreadyExists(String name) throws SQLException{
         String command = "SELECT nome FROM Maquina WHERE nome = ?";
 
@@ -65,13 +88,13 @@ public class MachineRepositoryAdapter implements MachineRepositoryPort {
 
     @Override
     public Machine getMachineById(Long id) throws SQLException {
-        String command = "SELECT id, nome, setor, status FROM Maquina WHERE id = ?";
+        String command = "SELECT nome, setor, status FROM Maquina WHERE id = ?";
 
         try (Connection conn = ConnectionDatabase.connect();
-             PreparedStatement stmt = conn.prepareStatement(command);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(command)) {
 
             stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 String name = rs.getString("nome");
                 String sector = rs.getString("setor");

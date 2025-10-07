@@ -1,16 +1,20 @@
 package org.maintenancesystem.presentation.view;
 
+import org.maintenancesystem.domain.model.entities.Machine;
 import org.maintenancesystem.domain.model.entities.Technician;
 import org.maintenancesystem.presentation.helpers.InputHelper;
 import org.maintenancesystem.presentation.helpers.MessageHelper;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class TechnicianView {
 
     static Scanner sc = new Scanner(System.in);
 
-    public static Long insertID(){
+    public Long insertID(List<Technician> technician){
+        getAllTechnicians(technician);
+        System.out.println("|| ---------------------------------------------");
         return (long) InputHelper.inputInteger("|| Insira o ID do técnico: ", sc);
     }
 
@@ -30,5 +34,12 @@ public class TechnicianView {
             }
         }
         return tec;
+    }
+
+    public void getAllTechnicians(List<Technician> technicians){
+        for(Technician technician : technicians){
+            System.out.println("|| ---------------------------------------------");
+            System.out.printf("|| [%d] %-20s \n|| Especialidade: %-20s \n", technician.getID(), technician.getName(), technician.getSpecialty());
+        }
     }
 }

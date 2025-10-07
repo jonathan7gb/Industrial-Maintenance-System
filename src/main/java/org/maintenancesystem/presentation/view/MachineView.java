@@ -12,7 +12,9 @@ public class MachineView {
 
     static Scanner sc = new Scanner(System.in);
 
-    public Long insertID(){
+    public Long insertID(List<Machine> machines){
+        getAllMachines(machines);
+        System.out.println("|| ---------------------------------------------");
         return (long) InputHelper.inputInteger("|| Insira o ID da máquina: ", sc);
     }
 
@@ -36,7 +38,7 @@ public class MachineView {
     public void getAllMachines(List<Machine> machines){
         for(Machine machine : machines){
             System.out.println("|| ---------------------------------------------");
-            System.out.printf("|| [%d] %-15s \n|| %-20s || %-13s ", machine.getID(), machine.getName(), machine.getSector(), machine.getStatus());
+            System.out.printf("|| [%d] %-20s \n|| Setor: %-20s\n|| Status: %-13s \n", machine.getID(), machine.getName(), machine.getSector(), machine.getStatus());
         }
     }
 }

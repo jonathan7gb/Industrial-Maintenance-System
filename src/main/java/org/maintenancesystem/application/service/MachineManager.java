@@ -17,7 +17,7 @@ public class MachineManager {
         this.machineRepository = machineRepository;
     }
 
-    public  void registerMachine(){
+    public void registerMachine(){
         Machine machine = machineView.insertMachine();
         MachineRepositoryAdapter machineRepository = new MachineRepositoryAdapter();
         try{
