@@ -1,4 +1,4 @@
-package org.maintenancesystem.domain.port;
+package org.maintenancesystem.domain.port.Technician;
 
 import org.maintenancesystem.domain.model.entities.Technician;
 

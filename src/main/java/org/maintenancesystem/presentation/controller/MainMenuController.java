@@ -4,8 +4,16 @@ import org.maintenancesystem.application.service.MachineManager;
 import org.maintenancesystem.application.service.MaintenanceRequestManager;
 import org.maintenancesystem.application.service.PartManager;
 import org.maintenancesystem.application.service.TechnicianManager;
-import org.maintenancesystem.domain.port.*;
-import org.maintenancesystem.infrastructure.adapter.*;
+import org.maintenancesystem.domain.port.Machine.MachineRepositoryPort;
+import org.maintenancesystem.domain.port.Maintenance.MaintenanceRepositoryPort;
+import org.maintenancesystem.domain.port.Part.PartOrderRepositoryPort;
+import org.maintenancesystem.domain.port.Part.PartRepositoryPort;
+import org.maintenancesystem.domain.port.Technician.TechnicianRepositoryPort;
+import org.maintenancesystem.infrastructure.adapter.Machine.MachineRepositoryAdapter;
+import org.maintenancesystem.infrastructure.adapter.Maintenance.MaintenanceRepositoryAdapter;
+import org.maintenancesystem.infrastructure.adapter.Part.PartOrderRepositoryAdapter;
+import org.maintenancesystem.infrastructure.adapter.Part.PartRepositoryAdapter;
+import org.maintenancesystem.infrastructure.adapter.Technician.TechnicianRepositoryAdapter;
 import org.maintenancesystem.presentation.helpers.MessageHelper;
 import org.maintenancesystem.presentation.view.MainMenuView;
 

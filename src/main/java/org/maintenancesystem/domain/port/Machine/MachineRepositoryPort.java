@@ -1,4 +1,4 @@
-package org.maintenancesystem.domain.port;
+package org.maintenancesystem.domain.port.Machine;
 
 import org.maintenancesystem.domain.model.entities.Machine;
 import org.maintenancesystem.domain.model.enums.MachineStatus;

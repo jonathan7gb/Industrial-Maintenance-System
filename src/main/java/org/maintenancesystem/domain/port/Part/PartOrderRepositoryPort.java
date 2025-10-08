@@ -1,9 +1,6 @@
-package org.maintenancesystem.domain.port;
-
-import org.maintenancesystem.domain.model.entities.MaintenanceRequest;
+package org.maintenancesystem.domain.port.Part;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public interface PartOrderRepositoryPort {
 

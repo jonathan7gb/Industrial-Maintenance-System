@@ -1,6 +1,5 @@
-package org.maintenancesystem.domain.port;
+package org.maintenancesystem.domain.port.Maintenance;
 
-import org.maintenancesystem.domain.model.entities.Machine;
 import org.maintenancesystem.domain.model.entities.MaintenanceRequest;
 
 import java.sql.SQLException;

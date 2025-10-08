@@ -1,7 +1,7 @@
-package org.maintenancesystem.infrastructure.adapter;
+package org.maintenancesystem.infrastructure.adapter.Part;
 
 import org.maintenancesystem.domain.model.entities.Part;
-import org.maintenancesystem.domain.port.PartRepositoryPort;
+import org.maintenancesystem.domain.port.Part.PartRepositoryPort;
 import org.maintenancesystem.infrastructure.configuration.ConnectionDatabase;
 
 import java.sql.Connection;

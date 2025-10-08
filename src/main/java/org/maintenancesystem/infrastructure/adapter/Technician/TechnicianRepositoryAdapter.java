@@ -1,7 +1,7 @@
-package org.maintenancesystem.infrastructure.adapter;
+package org.maintenancesystem.infrastructure.adapter.Technician;
 
 import org.maintenancesystem.domain.model.entities.Technician;
-import org.maintenancesystem.domain.port.TechnicianRepositoryPort;
+import org.maintenancesystem.domain.port.Technician.TechnicianRepositoryPort;
 import org.maintenancesystem.infrastructure.configuration.ConnectionDatabase;
 
 import java.sql.Connection;

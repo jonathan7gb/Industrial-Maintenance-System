@@ -1,8 +1,8 @@
-package org.maintenancesystem.infrastructure.adapter;
+package org.maintenancesystem.infrastructure.adapter.Machine;
 
 import org.maintenancesystem.domain.model.entities.Machine;
 import org.maintenancesystem.domain.model.enums.MachineStatus;
-import org.maintenancesystem.domain.port.MachineRepositoryPort;
+import org.maintenancesystem.domain.port.Machine.MachineRepositoryPort;
 import org.maintenancesystem.infrastructure.configuration.ConnectionDatabase;
 
 import java.sql.*;

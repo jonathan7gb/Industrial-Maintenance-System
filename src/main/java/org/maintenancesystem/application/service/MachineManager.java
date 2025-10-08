@@ -1,8 +1,8 @@
 package org.maintenancesystem.application.service;
 
 import org.maintenancesystem.domain.model.entities.Machine;
-import org.maintenancesystem.domain.port.MachineRepositoryPort;
-import org.maintenancesystem.infrastructure.adapter.MachineRepositoryAdapter;
+import org.maintenancesystem.domain.port.Machine.MachineRepositoryPort;
+import org.maintenancesystem.infrastructure.adapter.Machine.MachineRepositoryAdapter;
 import org.maintenancesystem.presentation.helpers.MessageHelper;
 import org.maintenancesystem.presentation.view.MachineView;
 

@@ -1,10 +1,12 @@
-package org.maintenancesystem.infrastructure.adapter;
+package org.maintenancesystem.infrastructure.adapter.Maintenance;
 
 import org.maintenancesystem.domain.model.entities.Machine;
 import org.maintenancesystem.domain.model.entities.MaintenanceRequest;
 import org.maintenancesystem.domain.model.entities.Technician;
 import org.maintenancesystem.domain.model.enums.MaintenanceRequestStatus;
-import org.maintenancesystem.domain.port.MaintenanceRepositoryPort;
+import org.maintenancesystem.domain.port.Maintenance.MaintenanceRepositoryPort;
+import org.maintenancesystem.infrastructure.adapter.Machine.MachineRepositoryAdapter;
+import org.maintenancesystem.infrastructure.adapter.Technician.TechnicianRepositoryAdapter;
 import org.maintenancesystem.infrastructure.configuration.ConnectionDatabase;
 
 import java.sql.*;

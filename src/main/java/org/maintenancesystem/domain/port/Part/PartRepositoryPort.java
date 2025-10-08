@@ -1,4 +1,4 @@
-package org.maintenancesystem.domain.port;
+package org.maintenancesystem.domain.port.Part;
 
 import org.maintenancesystem.domain.model.entities.Part;
 
