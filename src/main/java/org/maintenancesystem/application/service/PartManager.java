@@ -88,6 +88,7 @@ public class PartManager {
                         partView.getAllParts(parts);
                         partID = partView.insertID();
                         if(partID == 0){
+                            System.out.println();
                             return;
                         }else{
                             part = partRepositoryAdapter.getPartByIdStockIsMoreThan0(partID);
