@@ -72,4 +72,9 @@ public class MaintenanceRequest {
     public void setStatus(org.maintenancesystem.domain.model.enums.MaintenanceRequestStatus status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "|| ["+this.ID+"] "+this.requestDate+" \n|| Máquina: "+this.getMachine().getName()+"\n|| Técnico: "+this.getTechnical().getName()+" \n|| Status: "+ this.status ;
+    }
 }

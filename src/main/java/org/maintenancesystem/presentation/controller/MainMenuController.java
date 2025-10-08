@@ -1,16 +1,16 @@
 package org.maintenancesystem.presentation.controller;
 
-import org.maintenancesystem.application.service.MachineManager;
-import org.maintenancesystem.application.service.MaintenanceRequestManager;
-import org.maintenancesystem.application.service.PartManager;
-import org.maintenancesystem.application.service.TechnicianManager;
+import org.maintenancesystem.application.service.Machine.MachineManager;
+import org.maintenancesystem.application.service.MaintenanceRequest.MaintenanceRequestManager;
+import org.maintenancesystem.application.service.Part.PartManager;
+import org.maintenancesystem.application.service.Technician.TechnicianManager;
 import org.maintenancesystem.domain.port.Machine.MachineRepositoryPort;
-import org.maintenancesystem.domain.port.Maintenance.MaintenanceRepositoryPort;
+import org.maintenancesystem.domain.port.MaintenanceRequest.MaintenanceRepositoryPort;
 import org.maintenancesystem.domain.port.Part.PartOrderRepositoryPort;
 import org.maintenancesystem.domain.port.Part.PartRepositoryPort;
 import org.maintenancesystem.domain.port.Technician.TechnicianRepositoryPort;
 import org.maintenancesystem.infrastructure.adapter.Machine.MachineRepositoryAdapter;
-import org.maintenancesystem.infrastructure.adapter.Maintenance.MaintenanceRepositoryAdapter;
+import org.maintenancesystem.infrastructure.adapter.MaintenanceRequest.MaintenanceRepositoryAdapter;
 import org.maintenancesystem.infrastructure.adapter.Part.PartOrderRepositoryAdapter;
 import org.maintenancesystem.infrastructure.adapter.Part.PartRepositoryAdapter;
 import org.maintenancesystem.infrastructure.adapter.Technician.TechnicianRepositoryAdapter;
@@ -45,6 +45,7 @@ public class MainMenuController {
                 case 3 -> partManager.registerPart();
                 case 4 -> maintenanceRequestManager.insertMaintenanceRequest();
                 case 5 -> partManager.associatePartsToAOrder();
+                case 6 -> maintenanceRequestManager.executeMaintenanceRequest();
                 case 0 -> {
                     System.out.println("\n|| ---- Saindo do Sistema ---- ||\n");
                     return;

@@ -22,6 +22,11 @@ public class Machine {
         this.status = status;
     }
 
+    public Machine (Long ID,String name){
+        this.ID = ID;
+        this.name = name;
+    }
+
     public Machine (String name){
         this.name = name;
     }

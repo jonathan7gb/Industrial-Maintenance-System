@@ -1,4 +1,4 @@
-package org.maintenancesystem.application.service;
+package org.maintenancesystem.application.service.Machine;
 
 import org.maintenancesystem.domain.model.entities.Machine;
 import org.maintenancesystem.domain.port.Machine.MachineRepositoryPort;

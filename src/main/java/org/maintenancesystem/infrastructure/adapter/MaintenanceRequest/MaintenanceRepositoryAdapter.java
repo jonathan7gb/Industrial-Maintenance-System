@@ -1,10 +1,10 @@
-package org.maintenancesystem.infrastructure.adapter.Maintenance;
+package org.maintenancesystem.infrastructure.adapter.MaintenanceRequest;
 
 import org.maintenancesystem.domain.model.entities.Machine;
 import org.maintenancesystem.domain.model.entities.MaintenanceRequest;
 import org.maintenancesystem.domain.model.entities.Technician;
 import org.maintenancesystem.domain.model.enums.MaintenanceRequestStatus;
-import org.maintenancesystem.domain.port.Maintenance.MaintenanceRepositoryPort;
+import org.maintenancesystem.domain.port.MaintenanceRequest.MaintenanceRepositoryPort;
 import org.maintenancesystem.infrastructure.adapter.Machine.MachineRepositoryAdapter;
 import org.maintenancesystem.infrastructure.adapter.Technician.TechnicianRepositoryAdapter;
 import org.maintenancesystem.infrastructure.configuration.ConnectionDatabase;
@@ -79,6 +79,8 @@ public class MaintenanceRepositoryAdapter implements MaintenanceRepositoryPort {
                 OM.id,
                 OM.dataSolicitacao,
                 OM.status,
+                M.id AS maquina_id,
+                T.id AS tecnico_id,
                 M.nome AS nome_maquina,  
                 T.nome AS nome_tecnico
             FROM
@@ -103,13 +105,29 @@ public class MaintenanceRepositoryAdapter implements MaintenanceRepositoryPort {
                 Date data = rs.getDate("dataSolicitacao");
                 MaintenanceRequestStatus status = MaintenanceRequestStatus.valueOf(rs.getString("status"));
 
-                Machine machine = new Machine(rs.getString("nome_maquina"));
-                Technician technician = new Technician(rs.getString("nome_tecnico"));
+                Machine machine = new Machine(rs.getLong("maquina_id"), rs.getString("nome_maquina"));
+                Technician technician = new Technician(rs.getLong("tecnico_id"), rs.getString("nome_tecnico"));
                 LocalDate dataSolicitacao = data.toLocalDate();
                 return new MaintenanceRequest(ID, machine, technician, dataSolicitacao,status);
             }
 
             return null;
+        }
+    }
+
+    @Override
+    public boolean updateMaintenanceStatus(Long id, MaintenanceRequestStatus maintenanceRequestStatus) throws SQLException {
+        String command = "UPDATE OrdemManutencao SET status = ? WHERE id = ?";
+
+        try (Connection conn = ConnectionDatabase.connect();
+             PreparedStatement stmt = conn.prepareStatement(command)) {
+
+            stmt.setString(1, maintenanceRequestStatus.toString());
+            stmt.setLong(2, id);
+
+            int rowsAffected = stmt.executeUpdate();
+
+            return rowsAffected > 0;
         }
     }
 }

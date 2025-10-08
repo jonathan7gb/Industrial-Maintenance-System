@@ -1,12 +1,17 @@
-package org.maintenancesystem.application.service;
+package org.maintenancesystem.application.service.MaintenanceRequest;
 
 import org.maintenancesystem.domain.model.entities.Machine;
 import org.maintenancesystem.domain.model.entities.MaintenanceRequest;
+import org.maintenancesystem.domain.model.entities.Part;
 import org.maintenancesystem.domain.model.entities.Technician;
 import org.maintenancesystem.domain.model.enums.MachineStatus;
-import org.maintenancesystem.domain.port.Maintenance.MaintenanceRepositoryPort;
+import org.maintenancesystem.domain.model.enums.MaintenanceRequestStatus;
+import org.maintenancesystem.domain.port.MaintenanceRequest.MaintenanceRepositoryPort;
 import org.maintenancesystem.infrastructure.adapter.Machine.MachineRepositoryAdapter;
+import org.maintenancesystem.infrastructure.adapter.MaintenanceRequest.MaintenanceRepositoryAdapter;
+import org.maintenancesystem.infrastructure.adapter.Part.PartRepositoryAdapter;
 import org.maintenancesystem.infrastructure.adapter.Technician.TechnicianRepositoryAdapter;
+import org.maintenancesystem.presentation.helpers.InputHelper;
 import org.maintenancesystem.presentation.helpers.MessageHelper;
 import org.maintenancesystem.presentation.view.MachineView;
 import org.maintenancesystem.presentation.view.MaintenanceRequestView;
@@ -15,6 +20,7 @@ import org.maintenancesystem.presentation.view.TechnicianView;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class MaintenanceRequestManager {
 
@@ -88,6 +94,50 @@ public class MaintenanceRequestManager {
             MessageHelper.success("Ordem de manutenção criada com sucesso!\n");
         }catch (SQLException e){
             MessageHelper.error(e.getMessage());
+        }
+    }
+
+    public void executeMaintenanceRequest(){
+        while(true){
+            List<MaintenanceRequest> maintenanceRequests = new ArrayList<>();
+            MaintenanceRepositoryAdapter maintenanceRepositoryAdapter = new MaintenanceRepositoryAdapter();
+            MachineRepositoryAdapter machineRepositoryAdapter = new MachineRepositoryAdapter();
+
+            MaintenanceRequest mr = null;
+            try{
+                System.out.println("\n|| --------- --Executar Manutenção ---------- ||");
+                maintenanceRequests = maintenanceRepositoryAdapter.getAllPendingMaintenanceRequests();
+
+                if(maintenanceRequests.isEmpty()){
+                    MessageHelper.error("Nenhuma ordem encontrada!\n");
+                    return;
+                }else{
+                    Long maintenanceID = maintenanceRequestView.insertID(maintenanceRequests);
+                    mr = maintenanceRepositoryAdapter.getPendingMaintenanceById(maintenanceID);
+                    if(mr == null){
+                        MessageHelper.error("Nenhuma ordem encontrada com esse ID!");
+                    }else{
+                        System.out.println("\n|| ---------------------------------------------");
+                        System.out.println(mr);
+                        System.out.println("|| ---------------------------------------------");
+                        String choice = InputHelper.inputString("\n|| Você tem certeza que quer executar a manutenção?\n|| S - Sim\n|| N - Não\n|| Sua escolha: ", new Scanner(System.in));
+
+                        if(choice.equalsIgnoreCase("S")){
+                            maintenanceRepositoryAdapter.updateMaintenanceStatus(mr.getID(), MaintenanceRequestStatus.EXECUTADA);
+                            machineRepositoryAdapter.updateMachineStatus(mr.getMachine().getID(), MachineStatus.OPERACIONAL);
+                            MessageHelper.success("Manutenção executada com sucesso!\n");
+                            break;
+                        }else if(choice.equalsIgnoreCase("N")){
+                            MessageHelper.info("Manutenção cancelada com sucesso!\n");
+                            break;
+                        }else{
+                            MessageHelper.error("Entrada inválida!");
+                        }
+                    }
+                }
+            }catch (SQLException e){
+                MessageHelper.error(e.getMessage());
+            }
         }
 
     }

@@ -17,6 +17,11 @@ public class Technician {
         this.specialty = specialty;
     }
 
+    public Technician (Long ID, String name){
+        this.ID = ID;
+        this.name = name;
+    }
+
     public Technician (String name){
         this.name = name;
     }

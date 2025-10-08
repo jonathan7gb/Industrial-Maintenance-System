@@ -1,10 +1,10 @@
-package org.maintenancesystem.application.service;
+package org.maintenancesystem.application.service.Part;
 
 import org.maintenancesystem.domain.model.entities.MaintenanceRequest;
 import org.maintenancesystem.domain.model.entities.Part;
 import org.maintenancesystem.domain.port.Part.PartOrderRepositoryPort;
 import org.maintenancesystem.domain.port.Part.PartRepositoryPort;
-import org.maintenancesystem.infrastructure.adapter.Maintenance.MaintenanceRepositoryAdapter;
+import org.maintenancesystem.infrastructure.adapter.MaintenanceRequest.MaintenanceRepositoryAdapter;
 import org.maintenancesystem.infrastructure.adapter.Part.PartRepositoryAdapter;
 import org.maintenancesystem.presentation.helpers.MessageHelper;
 import org.maintenancesystem.presentation.view.MaintenanceRequestView;
