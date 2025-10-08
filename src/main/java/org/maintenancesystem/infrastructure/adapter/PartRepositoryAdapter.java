@@ -121,4 +121,19 @@ public class PartRepositoryAdapter implements PartRepositoryPort {
             return null;
         }
     }
+
+    @Override
+    public void updatePartStock(Long id, double quantityUse) throws SQLException {
+        String command = "UPDATE Peca SET estoque = estoque - ? WHERE id = ?";
+
+        try (Connection conn = ConnectionDatabase.connect();
+             PreparedStatement stmt = conn.prepareStatement(command)) {
+
+            stmt.setDouble(1, quantityUse);
+            stmt.setLong(2, id);
+            stmt.executeUpdate();
+
+
+        }
+    }
 }

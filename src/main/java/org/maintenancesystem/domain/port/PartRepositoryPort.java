@@ -13,4 +13,5 @@ public interface PartRepositoryPort {
     boolean verifyPartIfNameAlreadyExists(String name) throws SQLException;
     Part getPartById(Long id) throws SQLException;
     Part getPartByIdStockIsMoreThan0(Long id) throws SQLException;
+    void updatePartStock(Long id, double quantityUse) throws SQLException;
 }

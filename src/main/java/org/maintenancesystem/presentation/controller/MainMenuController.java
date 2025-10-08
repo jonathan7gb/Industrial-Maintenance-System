@@ -4,14 +4,8 @@ import org.maintenancesystem.application.service.MachineManager;
 import org.maintenancesystem.application.service.MaintenanceRequestManager;
 import org.maintenancesystem.application.service.PartManager;
 import org.maintenancesystem.application.service.TechnicianManager;
-import org.maintenancesystem.domain.port.MachineRepositoryPort;
-import org.maintenancesystem.domain.port.MaintenanceRepositoryPort;
-import org.maintenancesystem.domain.port.PartRepositoryPort;
-import org.maintenancesystem.domain.port.TechnicianRepositoryPort;
-import org.maintenancesystem.infrastructure.adapter.MachineRepositoryAdapter;
-import org.maintenancesystem.infrastructure.adapter.MaintenanceRepositoryAdapter;
-import org.maintenancesystem.infrastructure.adapter.PartRepositoryAdapter;
-import org.maintenancesystem.infrastructure.adapter.TechnicianRepositoryAdapter;
+import org.maintenancesystem.domain.port.*;
+import org.maintenancesystem.infrastructure.adapter.*;
 import org.maintenancesystem.presentation.helpers.MessageHelper;
 import org.maintenancesystem.presentation.view.MainMenuView;
 
@@ -26,7 +20,8 @@ public class MainMenuController {
     MachineManager machineManager = new MachineManager(m);
 
     PartRepositoryPort p = new PartRepositoryAdapter();
-    PartManager partManager = new PartManager(p);
+    PartOrderRepositoryPort po = new PartOrderRepositoryAdapter();
+    PartManager partManager = new PartManager(p, po);
 
     MaintenanceRepositoryPort mr = new MaintenanceRepositoryAdapter();
     MaintenanceRequestManager maintenanceRequestManager = new MaintenanceRequestManager(mr);
