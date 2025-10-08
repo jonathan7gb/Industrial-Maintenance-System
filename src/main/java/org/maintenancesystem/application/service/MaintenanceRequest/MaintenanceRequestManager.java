@@ -9,12 +9,14 @@ import org.maintenancesystem.domain.model.enums.MaintenanceRequestStatus;
 import org.maintenancesystem.domain.port.MaintenanceRequest.MaintenanceRepositoryPort;
 import org.maintenancesystem.infrastructure.adapter.Machine.MachineRepositoryAdapter;
 import org.maintenancesystem.infrastructure.adapter.MaintenanceRequest.MaintenanceRepositoryAdapter;
+import org.maintenancesystem.infrastructure.adapter.Part.PartOrderRepositoryAdapter;
 import org.maintenancesystem.infrastructure.adapter.Part.PartRepositoryAdapter;
 import org.maintenancesystem.infrastructure.adapter.Technician.TechnicianRepositoryAdapter;
 import org.maintenancesystem.presentation.helpers.InputHelper;
 import org.maintenancesystem.presentation.helpers.MessageHelper;
 import org.maintenancesystem.presentation.view.MachineView;
 import org.maintenancesystem.presentation.view.MaintenanceRequestView;
+import org.maintenancesystem.presentation.view.PartView;
 import org.maintenancesystem.presentation.view.TechnicianView;
 
 import java.sql.SQLException;
@@ -100,9 +102,12 @@ public class MaintenanceRequestManager {
     public void executeMaintenanceRequest(){
         while(true){
             List<MaintenanceRequest> maintenanceRequests = new ArrayList<>();
+            List<String> orderParts = new ArrayList<>();
             MaintenanceRepositoryAdapter maintenanceRepositoryAdapter = new MaintenanceRepositoryAdapter();
             MachineRepositoryAdapter machineRepositoryAdapter = new MachineRepositoryAdapter();
+            PartOrderRepositoryAdapter partOrderRepositoryAdapter = new PartOrderRepositoryAdapter();
 
+            PartView partView = new PartView();
             MaintenanceRequest mr = null;
             try{
                 System.out.println("\n|| --------- --Executar Manutenção ---------- ||");
@@ -119,6 +124,8 @@ public class MaintenanceRequestManager {
                     }else{
                         System.out.println("\n|| ---------------------------------------------");
                         System.out.println(mr);
+                        orderParts = partOrderRepositoryAdapter.getAllOrderParts(mr.getID());
+                        partView.getAllOrderParts(orderParts);
                         System.out.println("|| ---------------------------------------------");
                         String choice = InputHelper.inputString("\n|| Você tem certeza que quer executar a manutenção?\n|| S - Sim\n|| N - Não\n|| Sua escolha: ", new Scanner(System.in));
 

@@ -46,4 +46,12 @@ public class PartView {
         System.out.println("|| ---------------------------------------------");
     }
 
+    public void getAllOrderParts(List<String> partsOrder){
+        System.out.println("|| ---------------------------------------------");
+        System.out.println("|| Peças Usadas:");
+        for(String str : partsOrder){
+            System.out.printf(str);
+        }
+    }
+
 }
